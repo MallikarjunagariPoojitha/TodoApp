@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .head{
+            margin: auto;
+            width:500px;
+           padding: 20px;
+            border:1px solid black;
+            background-color: lightpink;
+            margin-left:10cm;
+            margin-top:5cm;
+            text-align: center;
+        }
+        .head h2{
+            text-align: center;
+            font-family: cursive;
+        }
+        .head button{
+            color:blue;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .paragraph-style{
+             font-size: 20px;
+             cursor: pointer;
+            margin-right: 4.6cm;
+           margin-left:-2cm;
+            font-family: cursive;
+            font-weight: bold;
+        }
+        .checkbox-style{
+            float: right;
+            margin-top:-1cm;
+            margin-right:3cm;
+            cursor: pointer;
+        }
+        .del-style{
+            float: right;
+            margin-top:-1.1cm;
+            margin-right:2cm;
+            cursor: pointer;
+        }
+        .edit-style{
+            float: right;
+            margin-top:-1.2cm;
+            margin-right:1.8cm;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 576px) {
+            .head{
+            width:90%;
+            margin: auto;
+           padding: 20px;
+            border:1px solid black;
+            background-color: lightpink;
+            margin-top:5cm;
+            text-align: center;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <h2>My To Do List</h2>
+        <form>
+            <input type="text"  id="value">
+            <button type="submit" id="submit">+</button>
+            <div class="text-container" id="to-dos"></div>
+        </form>
+    </div>
+    <script>
+        let button=document.getElementById('submit');
+        let input=document.getElementById("value");
+        let text_conatiner=document.getElementById("to-dos");
+
+        button.addEventListener("click",function(event){
+            event.preventDefault();
+            if(input.value
+            !==''){
+            var paragraph=document.createElement('p');
+            paragraph.classList.add('paragraph-style')
+            paragraph.innerText=input.value;
+            text_conatiner.appendChild(paragraph);
+            input.value="";
+
+            var checkbox=document.createElement('input');
+            checkbox.type='checkbox';
+            checkbox.classList.add('checkbox-style')
+            text_conatiner.appendChild(checkbox);
+            checkbox.addEventListener("change",function(){
+                if(checkbox.checked){
+                    paragraph.style.textDecoration="line-through";
+                   paragraph.style.color="green";
+            }
+            else{
+                paragraph.style.textDecoration="none";
+                paragraph.style.color="black";
+            }
+            })
+
+            var del=document.createElement('h3');
+            del.innerHTML='&#10008';
+            del.classList.add('del-style')
+            text_conatiner.appendChild(del);
+
+            del.addEventListener("click",function(){
+                text_conatiner.removeChild(paragraph);
+                text_conatiner.removeChild(checkbox);
+                text_conatiner.removeChild(del );
+                text_conatiner.removeChild(edit );
+            });
+
+            var edit=document.createElement('h2');
+            edit.innerHTML='&#9998';
+            edit.classList.add('edit-style');
+            text_conatiner.appendChild(edit);
+
+            edit.addEventListener("click",function(){
+                input.value=paragraph.innerText;
+                text_conatiner.removeChild(paragraph);
+                text_conatiner.removeChild(checkbox);
+                text_conatiner.removeChild(del );
+                text_conatiner.removeChild(edit );
+
+                
+            })
+
+        }
+           
+
+            /*paragraph.addEventListener("click",function(){
+                paragraph.style.textDecoration="line-through";
+            })
+            paragraph.addEventListener("dblclick",function(){
+                text_conatiner.removeChild(paragraph);
+            })*/
+
+        })
+        
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
